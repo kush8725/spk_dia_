@@ -69,7 +69,7 @@ def cluster_SC(embeds, n_clusters=None, threshold=None,
         kmeans_clusterer = KMeans(
             n_clusters=k,
             init="k-means++",
-            max_iter=300,
+            max_iter=600,
             random_state=0)
         labels = kmeans_clusterer.fit_predict(spectral_embeddings)
         return labels
