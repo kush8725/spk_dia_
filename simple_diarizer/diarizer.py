@@ -35,7 +35,7 @@ class Diarizer:
         if cluster_method == 'sc':
             self.cluster = cluster_SC
 
-        self.vad_model, self.get_speech_ts = self.setup_VAD()
+        self.vad_model= self.setup_VAD()
 
         self.run_opts = {"device": "cuda:0"} if torch.cuda.is_available() else {
             "device": "cpu"}
@@ -56,19 +56,17 @@ class Diarizer:
         from speechbrain.pretrained import VAD
 
         VAD = VAD.from_hparams(source="speechbrain/vad-crdnn-libriparty", savedir="pretrained_models/vad-crdnn-libriparty")
-        boundaries = VAD.get_speech_segments("speechbrain/vad-crdnn-libriparty/example_vad.wav")
-
+        #boundaries = VAD.get_speech_segments("speechbrain/vad-crdnn-libriparty/example_vad.wav")
+        
        
 
-
-        get_speech_ts = utils[0]
-        return model, get_speech_ts
 
     def vad(self, signal):
         """
         Runs the VAD model on the signal
         """
-        return self.get_speech_ts(signal, self.vad_model)
+        return self.VAD.get_speech_segments(signal)
+        #return self.get_speech_ts(signal, self.vad_model)
 
     def windowed_embeds(self, signal, fs, window=1.5, period=0.75):
         """
