@@ -53,9 +53,13 @@ class Diarizer:
         self.period = period
 
     def setup_VAD(self):
-        model, utils = torch.hub.load(repo_or_dir='snakers4/silero-vad',
-                                      model='silero_vad')
-        # force_reload=True)
+        from speechbrain.pretrained import VAD
+
+        VAD = VAD.from_hparams(source="speechbrain/vad-crdnn-libriparty", savedir="pretrained_models/vad-crdnn-libriparty")
+        boundaries = VAD.get_speech_segments("speechbrain/vad-crdnn-libriparty/example_vad.wav")
+
+       
+
 
         get_speech_ts = utils[0]
         return model, get_speech_ts
