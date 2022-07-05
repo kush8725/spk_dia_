@@ -49,7 +49,7 @@ class Diarizer:
                                                               savedir="pretrained_models/spkrec-ecapa-voxceleb",
                                                               run_opts=self.run_opts)
         if embed_model== 'AE':
-          self.embed_model=aespeech.compute_dynamic_features(wav_directory) 
+            self.embed_model=aespeech.compute_dynamic_features(wav_file) 
         self.window = window
         self.period = period
 
