@@ -26,7 +26,7 @@ class Diarizer:
                  period=0.75):
 
         assert embed_model in [
-            'xvec', 'ecapa'], "Only xvec and ecapa are supported options"
+            'xvec', 'ecapa','AE'], "Only xvec and ecapa are supported options"
         assert cluster_method in [
             'ahc', 'sc'], "Only ahc and sc in the supported clustering options"
 
@@ -48,7 +48,8 @@ class Diarizer:
             self.embed_model = EncoderClassifier.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb",
                                                               savedir="pretrained_models/spkrec-ecapa-voxceleb",
                                                               run_opts=self.run_opts)
-
+        if embed_model== 'AE':
+          self.embed_model=aespeech.compute_dynamic_features(wav_directory) 
         self.window = window
         self.period = period
 
