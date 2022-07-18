@@ -44,11 +44,9 @@ class Diarizer:
             self.embed_model = EncoderClassifier.from_hparams(source="speechbrain/spkrec-xvect-voxceleb",
                                                               run_opts=self.run_opts)
         if embed_model == 'ecapa':
-            print("it worked")
-            self.embed_model = EncoderClassifier.from_hparams(source=r"../input/chkpoints",
-                                                              hparams_file=r'../input/hyperparams'
-                                                            
-                                                              ,run_opts=self.run_opts)
+             self.embed_model = EncoderClassifier.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb",
+                                                               savedir="pretrained_models/spkrec-ecapa-voxceleb",
+                                                               run_opts=self.run_opts)
 ​
         self.window = window
         self.period = period
